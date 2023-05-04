@@ -8,10 +8,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Locale;
+use App\Entity\Client;
+use App\Entity\Ergonomie;
+use App\Entity\Logiciel;
+use App\Entity\Materiel;
+use App\Entity\Paiement;
+use App\Entity\Reservation;
+use App\Entity\Salle;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin', name: 'admin',methods :['GET','POST'])]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
@@ -20,7 +27,7 @@ class DashboardController extends AbstractDashboardController
         //
 
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(ProjectCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(ClientCrudController::class)->generateUrl());
         // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
 
@@ -77,7 +84,13 @@ class DashboardController extends AbstractDashboardController
     }
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
+        yield MenuItem::linkToCrud('clients', 'fas fa-list', Client::class);
+        yield MenuItem::linkToCrud('ergonomie', 'fas fa-list', Ergonomie::class);
+        yield MenuItem::linkToCrud('logiciels', 'fas fa-list', Logiciel::class);
+        yield MenuItem::linkToCrud('materiels', 'fas fa-list', Materiel::class);
+        yield MenuItem::linkToCrud('paiements', 'fas fa-list', Paiement::class);
+        yield MenuItem::linkToCrud('reservations', 'fas fa-list', Reservation::class);
+        yield MenuItem::linkToCrud('salles', 'fas fa-list', Salle::class);
     }
 }
