@@ -2,35 +2,31 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href={{ asset('assets/css/bootstrap.min.css') }}>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </head>
     <body>
     <main>
+  
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Projet ECF</a>
+    <a class="navbar-brand" href={{path('accueil')}}>Projet ECF</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+          <a class="nav-link active" aria-current="page" href={{path('accueil')}}>Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Salles</a>
+          <a class="nav-link" href={{path('app_salle')}}>Salles</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="nav-link" href='#'>Contact</a>
+        </li>
+        {# <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
@@ -43,7 +39,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
-        </li>
+        </li> #}
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
       {% if app.user %}
@@ -69,17 +65,11 @@
     </div>
   </div>
 </nav>
-
-
-
-        {% block body %}
-        
-
-
-        
-        {% endblock %}
-
-        				<footer class="pt-3 mt-4 border-top text-center ">
+</header>
+<hr>
+        {% block body %}{% endblock %}
+         
+        <footer class="pt-3 mt-4 border-top text-center ">
 					{# <h6 >Cette application est construite avec :</h6>  #}
 					<p class="d-flex align-items-center justify-content-center gap-3 text-center">
             			<i class="fs-1 devicon-php-plain"></i>

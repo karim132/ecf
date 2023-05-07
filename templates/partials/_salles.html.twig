@@ -1,0 +1,14 @@
+<div class="row mt-5">
+{% for item in salles %}
+  <div class="shadow col-md-4 mb-4">
+    <div class="card card-bg rounded-4">
+    <div class="card-body">
+      <h5 class="card-title">{{item.nom}}</h5>
+      <p class="card-text">Nombre de places : {{item.nbPlaces}}</item></p>
+      
+    </div>
+  </div>
+
+</div>
+    
+{% endfor %}

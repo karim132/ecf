@@ -39,7 +39,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $adresse = null;
 
     #[ORM\Column]
-    private ?int $codePostal = null;
+    private ?string $codePostal = null;
 
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
@@ -153,12 +153,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCodePostal(): ?int
+    public function getCodePostal(): ?string
     {
         return $this->codePostal;
     }
 
-    public function setCodePostal(int $codePostal): self
+    public function setCodePostal(string $codePostal): self
     {
         $this->codePostal = $codePostal;
 

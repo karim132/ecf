@@ -33,6 +33,12 @@ class Salle
     #[ORM\OneToMany(mappedBy: 'salle', targetEntity: Reservation::class)]
     private Collection $reservations;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column]
+    private ?float $prixHebdo = null;
+
     public function __construct()
     {
         $this->materiel = new ArrayCollection();
@@ -168,6 +174,30 @@ class Salle
                 $reservation->setSalle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrixHebdo(): ?float
+    {
+        return $this->prixHebdo;
+    }
+
+    public function setPrixHebdo(float $prixHebdo): self
+    {
+        $this->prixHebdo = $prixHebdo;
 
         return $this;
     }

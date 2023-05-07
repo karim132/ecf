@@ -3,9 +3,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<section class="container">
- <div class="row">
- <div class="col">
+<main class="form-signin w-50 m-auto">
 
 <form method="post">
     {% if error %}
@@ -39,14 +37,10 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary mt-3" type="submit">
+    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">
         Connecter
     </button>
 </form>
 
- </div>
- </div>
-</section>
-
-
+</main>
 {% endblock %}
