@@ -15,13 +15,14 @@ use App\Entity\Materiel;
 use App\Entity\Paiement;
 use App\Entity\Reservation;
 use App\Entity\Salle;
+use App\Entity\Users;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin',methods :['GET','POST'])]
     public function index(): Response
     {
-        return $this->render('admin/index.html.twig');
+        return $this->render('admin/admin.html.twig');
 
                // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -85,12 +86,13 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
-        yield MenuItem::linkToCrud('clients', 'fas fa-list', Client::class);
+        // yield MenuItem::linkToCrud('clients', 'fas fa-list', Client::class);
         yield MenuItem::linkToCrud('ergonomie', 'fas fa-list', Ergonomie::class);
         yield MenuItem::linkToCrud('logiciels', 'fas fa-list', Logiciel::class);
         yield MenuItem::linkToCrud('materiels', 'fas fa-list', Materiel::class);
         yield MenuItem::linkToCrud('paiements', 'fas fa-list', Paiement::class);
         yield MenuItem::linkToCrud('reservations', 'fas fa-list', Reservation::class);
         yield MenuItem::linkToCrud('salles', 'fas fa-list', Salle::class);
+        yield MenuItem::linkToCrud('users', 'fas fa-list', Users::class);
     }
 }
