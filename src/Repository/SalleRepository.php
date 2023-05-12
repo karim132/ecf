@@ -39,6 +39,55 @@ class SalleRepository extends ServiceEntityRepository
         }
     }
 
+    // public function findAllWithData() : array
+    // {
+    //   return $this->createQueryBuilder('s')
+    //    ->leftJoin('s.ergonomie' ,'e')
+    //    ->leftJoin('s.materiel' ,'m')
+    //    ->leftJoin('s.logiciel' ,'l')
+    //    ->addSelect('e')
+    //    ->addSelect('m')
+    //    ->addSelect('l')
+    //    ->getQuery()
+    //    ->getResult();
+    // }
+
+    // public function findOneByIdJoinedToCategory(int $id) : array
+    // {
+    //   $query= $this->getEntityManager()->createQueryBuilder()
+    //   ->select('s', 'e')
+    //   ->from('App\Entity\Salle','s')
+    //   ->join('s.ergonomie' ,'e')
+    //   ->where("s.id ='$id'");
+
+    //   dd($query)
+      
+    // //   ->getQuery()
+    // //   ->getResult();
+    // ;}
+
+    /**
+    * @return Salle[] Returns an array of Vehicule objects
+     */
+     public function findAllWithData() : array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+        'SELECT s, e, m, l
+        FROM App\Entity\Salle s
+         INNER JOIN s.ergonomie e
+         INNER JOIN s.materiel m
+         INNER JOIN s.logiciel l'
+         
+        //   WHERE s.id = :id' 
+        
+    );
+
+    return $query->getResult();
+     
+    }
+
+
 //    /**
 //     * @return Salle[] Returns an array of Salle objects
 //     */
@@ -54,11 +103,11 @@ class SalleRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Salle
+//    public function findOneBySomeField($id): ?Salle
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
+//            ->setParameter('s.id', $id)
 //            ->getQuery()
 //            ->getOneOrNullResult()
 //        ;

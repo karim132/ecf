@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}salle{% endblock %}
+
+{% block body %}
+
+<h3>Toutes les infos de la salle</h3>
+ {# <div>
+	<h1 class="text-white">{{ oneSalle.nom }}</h1>
+	<p class="fs-4 text-white">{{ salle.nbPlaces }}</p>
+    <p>{{ salle.prixHebdo }} €</p>
+		</div>
+    </div>  #}
+{# 
+	<p class="text-white">Publié le :
+		{{ oneNote.createdAt|date("d/m/Y") }}
+		• Mis à jour le :
+		{{ oneNote.updatedAt|date("d/m/Y") }}</p> #}
+
+	{# <hr class="text-white"> #}
+
+	<div class="row pt-3 pb-3">
+		<div class="card p-4 rounded-3">
+        <h1 class="text-center">{{ oneSalle.nom }}</h1>
+	    <h5>Capacité de la salle : {{ oneSalle.nbPlaces }} places</h5>
+        <br>
+		<h5>Prix hebdomadaire : {{ oneSalle.prixHebdo }}€</h5>
+        <br>
+        <div>
+		{% for item in oneSalle.materiel %}
+		<h5>Matériel : {{ item.nom }}</h5>
+		{% endfor %}
+        </div>
+		<br>
+
+		{% for item in oneSalle.logiciel %}
+		<h5>Logiciel : {{ item.nom }}</h5>
+		{% endfor %}
+
+        <br> 
+		
+		{% for item in oneSalle.ergonomie %}
+		<h5>Ergonomie : {{ item.nom }}</h5>
+		{% endfor %}
+
+		</div>
+	</div>
+
+	<hr class="text-white">
+
+	<div class="col-md-12 text-center">
+	<a href={{ path('app_reservation', { id: oneSalle.id }) }} class="w-50 btn btn-lg btn-primary mb-3">Pré-réserver</a>
+	<br>
+		<a class="w-50 btn btn-lg btn-primary" href={{ path('app_salle') }}>Revenir à toutes les salles</a>
+		{# <a class="btn btn-primary" href={{ path('update_note', { id: oneNote.id} ) }}>Modifier la note</a> #}
+	</div>
+
+
+
+{# <h4>Vous avez choisi la </h1> #}
+
+{% endblock %}

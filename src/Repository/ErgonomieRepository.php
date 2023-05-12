@@ -39,6 +39,7 @@ class ErgonomieRepository extends ServiceEntityRepository
         }
     }
 
+
 //    /**
 //     * @return Ergonomie[] Returns an array of Ergonomie objects
 //     */
@@ -63,4 +64,5 @@ class ErgonomieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Locale;
-use App\Entity\Client;
+
 use App\Entity\Ergonomie;
 use App\Entity\Logiciel;
 use App\Entity\Materiel;

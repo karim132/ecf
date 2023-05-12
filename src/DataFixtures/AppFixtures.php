@@ -29,8 +29,9 @@ class AppFixtures extends Fixture
         //        $manager->persist($admin);
 
               $faker = Faker\Factory::create('fr_FR');
-       
-        //  for ($i=1; $i<21; $i++){
+
+        //  Boucle sur les users
+        //  for ($i=1; $i<51; $i++){
 
         //     $users = new Users();
         //     $users->setEmail($faker->email)
@@ -57,10 +58,6 @@ class AppFixtures extends Fixture
                    $manager->persist($salles);
 
          }
-
-
-
-
 
         $manager->flush();
     }

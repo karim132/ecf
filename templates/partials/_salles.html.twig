@@ -1,14 +1,51 @@
 <div class="row mt-5">
 {% for item in salles %}
+   {# <pre>
+    {{ dump(salles) }}
+   </pre> #}
+ {# {% for chose in ergonomie %}  #}
+{# {% for logiciel in logiciels %} #}
   <div class="shadow col-md-4 mb-4">
     <div class="card card-bg rounded-4">
     <div class="card-body">
-      <h5 class="card-title">{{item.nom}}</h5>
-      <p class="card-text">Nombre de places : {{item.nbPlaces}}</item></p>
-      
+    {# {% dump(salles) %} #}
+      <h5 class="card-title text-center">{{item.nom}}</h5>
+      {# <p class="card-text text-center">Nombre de places : {{item.nbPlaces}}</p>  #}
+      <p class="card-text text-center">Prix hebdomadaire : {{item.prixHebdo}} €</p>
+     
+       {# {% dump(salles) %}   #}
+       {# {% for ergonomie in salles %}
+           <pre>
+    {{ dump(ergonomie) }}
+   </pre>
+       {% endfor %} #}
+         {# <p class="card-text text-center">Ergonomie: {{ chose.nom }}</p> #}
+      {# <p class="card-text text-center">Logiciel: {{ item.logiciel.nom }} €</p> #}
+      <a href={{ path('app_oneSalle', { id: item.id }) }} class="w-100 btn btn-lg btn-primary mb-3">Plus d'infos</a> 
+
+      {% if item.disponible == true %}
+      <a href={{ path('app_reservation', { id: item.id }) }} class="w-100 btn btn-lg btn-primary mb-3">Pré-réserver</a>
+      <div class="alert alert-success text-center" role="alert">
+        Disponible 
+      </div>
+      {% else %}
+      <a href=# class="w-100 btn btn-lg btn-primary mb-3">M'alerter</a>
+      <div class="alert alert-danger text-center" role="alert">
+        Indisponible
+      </div>
+      {% endif %}
     </div>
   </div>
-
 </div>
-    
-{% endfor %}
+	{# {% else %}
+		<div class="col-md-12">
+			<div class="alert alert-warning" role="alert">
+				<h4 class="alert-heading">Aucune note</h4>
+				<p>Il n'y a aucune note pour le moment.</p>
+				<hr>
+				<p class="mb-0">Vous pouvez en créer une, en cliquant sur le bouton ci-dessous.</p>
+				<a href="" class="btn btn-success mt-3">Créer une note</a>
+			</div>
+		</div> #}
+   {% endfor %} 
+{# {% endfor %} #}
