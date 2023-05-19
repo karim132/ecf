@@ -4,55 +4,47 @@
 
 {% block body %}
 
-<h3>Toutes les infos de la salle</h3>
- {# <div>
-	<h1 class="text-white">{{ oneSalle.nom }}</h1>
-	<p class="fs-4 text-white">{{ salle.nbPlaces }}</p>
-    <p>{{ salle.prixHebdo }} €</p>
-		</div>
-    </div>  #}
-{# 
-	<p class="text-white">Publié le :
-		{{ oneNote.createdAt|date("d/m/Y") }}
-		• Mis à jour le :
-		{{ oneNote.updatedAt|date("d/m/Y") }}</p> #}
+<h2 class='text-center'>Toutes les infos de la salle</h2>
 
-	{# <hr class="text-white"> #}
-
-	<div class="row pt-3 pb-3">
-		<div class="card p-4 rounded-3">
-        <h1 class="text-center">{{ oneSalle.nom }}</h1>
-	    <h5>Capacité de la salle : {{ oneSalle.nbPlaces }} places</h5>
-        <br>
-		<h5>Prix hebdomadaire : {{ oneSalle.prixHebdo }}€</h5>
-        <br>
-        <div>
+	<div class="row align-items-center pt-3 pb-3">
+		{# <div class="card p-4 rounded-3"> #}
+        <h3 class="text-center">{{ oneSalle.nom }}</h3>
+	    <h5 class="text-center">Capacité de la salle : </h5>
+        <h5 class="text-center"> {{ oneSalle.nbPlaces }} places</h5>
+        <hr>
+		<h5 class="text-center">Prix hebdomadaire : </h5>
+        <h5 class="text-center"> {{ oneSalle.prixHebdo }}€</h5>
+        <hr>
+		<h5 class="text-center">Matériel : </h5>
 		{% for item in oneSalle.materiel %}
-		<h5>Matériel : {{ item.nom }}</h5>
-		{% endfor %}
-        </div>
-		<br>
-
-		{% for item in oneSalle.logiciel %}
-		<h5>Logiciel : {{ item.nom }}</h5>
-		{% endfor %}
-
-        <br> 
 		
-		{% for item in oneSalle.ergonomie %}
-		<h5>Ergonomie : {{ item.nom }}</h5>
+		<h5 class="text-center">{{ item.nom }}</h5>
 		{% endfor %}
-
+        {# </div> #}
+		<hr>
+        <h5 class="text-center">Logiciel :</h5>
+		{% for item in oneSalle.logiciel %}
+		<h5 class="text-center pb-2">{{ item.nom }}</h5>
+		{% endfor %}
+        <hr>
+        
+		<h5 class="text-center">Ergonomie :</h5>
+		{% for item in oneSalle.ergonomie %}
+		<h5 class="text-center pb-2">{{ item.nom }}</h5>
+		{% endfor %}
+		<hr>
+		{# </div> #}
+        </div> 
 		</div>
 	</div>
 
 	<hr class="text-white">
 
 	<div class="col-md-12 text-center">
-	<a href={{ path('app_reservation', { id: oneSalle.id }) }} class="w-50 btn btn-lg btn-primary mb-3">Pré-réserver</a>
+	<a href={{ path('app_reservation', { id: oneSalle.id })}} class="w-50 btn btn-lg btn-primary mb-3">Pré-réserver</a>
 	<br>
 		<a class="w-50 btn btn-lg btn-primary" href={{ path('app_salle') }}>Revenir à toutes les salles</a>
-		{# <a class="btn btn-primary" href={{ path('update_note', { id: oneNote.id} ) }}>Modifier la note</a> #}
+		
 	</div>
 
 

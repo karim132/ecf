@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -23,7 +24,7 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Client $client = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\ManyToOne(targetEntity: Salle::class,inversedBy: 'reservations')]
     private ?Salle $salle = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
@@ -93,4 +94,5 @@ class Reservation
 
         return $this;
     }
+  
 }

@@ -78,9 +78,6 @@ class SalleRepository extends ServiceEntityRepository
          INNER JOIN s.ergonomie e
          INNER JOIN s.materiel m
          INNER JOIN s.logiciel l'
-         
-        //   WHERE s.id = :id' 
-        
     );
 
     return $query->getResult();

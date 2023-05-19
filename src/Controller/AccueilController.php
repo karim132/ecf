@@ -17,7 +17,7 @@ class AccueilController extends AbstractController
             // Récupération des 6 dernières notes
             'salles' => $salle->findBy(
               [],
-              ['id' => 'DESC'],
+              ['id' => 'ASC'],
               6
           ),
             

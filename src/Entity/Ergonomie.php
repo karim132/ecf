@@ -18,7 +18,8 @@ class Ergonomie
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToMany(targetEntity: Salle::class, mappedBy: 'ergonomie')]
+    #[ORM\ManyToMany(targetEntity: Salle::class, mappedBy: 'ergonomie',cascade:["remove"])]
+    #[ORM\JoinColumn(name:"salle_id", referencedColumnName:"id")]
     private Collection $salles;
 
     public function __construct()
@@ -68,5 +69,9 @@ class Ergonomie
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->nom;
     }
 }

@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Locale;
+use App\Repository\ReservationRepository;
 
 use App\Entity\Ergonomie;
 use App\Entity\Logiciel;
@@ -16,73 +17,54 @@ use App\Entity\Paiement;
 use App\Entity\Reservation;
 use App\Entity\Salle;
 use App\Entity\Users;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class DashboardController extends AbstractDashboardController
 {
+    
+    public function configureCrud(): Crud
+    {
+        return Crud::new()
+            // ...
+            ->overrideTemplates([
+                // 'crud/index' => 'admin/pages/index.html.twig',
+                'crud/field/textarea' => 'admin/fields/dynamic_textarea.html.twig',
+            ])
+        ;
+    }
+
     #[Route('/admin', name: 'admin',methods :['GET','POST'])]
     public function index(): Response
     {
         return $this->render('admin/admin.html.twig');
-
-               // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(ClientCrudController::class)->generateUrl());
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        // return $this->render('some/path/my-dashboard.html.twig');
+        return $this->redirect($adminUrlGenerator->setController(ReservationCrudCrudController::class)->generateUrl());
+    
     }
+
+   
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Projet ECF')
 
-             // set this option if you prefer the page content to span the entire
-    // browser width, instead of the default design which sets a max width
-    // ->renderContentMaximized()
+            -> disableDarkMode()
 
-    // set this option if you prefer the sidebar (which contains the main menu)
-    // to be displayed as a narrow column instead of the default expanded design
-    // ->renderSidebarMinimized()
+            ->setLocales(['en', 'fr'])
 
-    // by default, users can select between a "light" and "dark" mode for the
-    // backend interface. Call this method if you prefer to disable the "dark"
-    // mode for any reason (e.g. if your interface customizations are not ready for it)
-    -> disableDarkMode()
+            ->setLocales([
+                'en' => '🇬🇧 English',
+                'fr' => '🇫🇷 French'
+            ])
 
-    // set this option if you want to enable locale switching in dashboard.
-    // IMPORTANT: this feature won't work unless you add the {_locale}
-    // parameter in the admin dashboard URL (e.g. '/admin/{_locale}').
-    // the name of each locale will be rendered in that locale
-    // (in the following example you'll see: "English", "Polski")
-    ->setLocales(['en', 'fr'])
-    // to customize the labels of locales, pass a key => value array
-    // (e.g. to display flags; although it's not a recommended practice,
-    // because many languages/locales are not associated to a single country)
-    ->setLocales([
-        'en' => '🇬🇧 English',
-        'fr' => '🇫🇷 French'
-    ])
-    // to further customize the locale option, pass an instance of
-    // EasyCorp\Bundle\EasyAdminBundle\Config\Locale
-    ->setLocales([
-        'en', // locale without custom options
-        Locale::new('fr', 'french', 'far fa-language') // custom label and icon
-    ])
-;
-    }
+            ->setLocales([
+                'en', 
+                Locale::new('fr', 'french', 'far fa-language') 
+            ])
+        ;
+            }
+
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
@@ -96,4 +78,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('salles', 'fas fa-list', Salle::class);
         
     }
+
+
+
 }

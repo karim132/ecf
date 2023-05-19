@@ -1,0 +1,47 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var action \EasyCorp\Bundle\EasyAdminBundle\Dto\ActionDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+   {# {{ dump(action) }}   #}
+
+{% block title %}
+
+{% endblock %}
+
+
+{# <form action="" method="POST">
+   
+
+    {# {{ include('@EasyAdmin/crud/action.html.twig') }} #}
+    
+   
+
+{# </form>  #}
+{% block body %}
+
+  <h1 class='text-center'>Validation effectuée avec succès</h1>
+
+  {% endblock %} 
+
+    {# <div class="container mt-3">
+    
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+ 
+        <button type="submit" class="btn btn-primary mt-2">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %} 
+
+{# <div>
+
+<form action="{{ action.linkUrl }}" method="POST" class="me-2">
+    {{ include('@EasyAdmin/crud/action.html.twig') }}
+
+    
+</form> #}
+
+
+
+</div>
+

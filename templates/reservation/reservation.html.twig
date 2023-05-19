@@ -4,10 +4,33 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
-    {{ form_rest(form) }}
-    <button type="submit">Enregistrer</button>
-    {{ form_end(form) }}
+
+    <h4 class='text-center'>Vous êtes sur le point de réserver</h4>
+    <h5 class='text-center'>Quelles dates vous intéressent ?</h5>
+
+    <div class="container mt-3">
+    
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+ 
+        <button type="submit" class="btn btn-primary mt-2">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+
+
+
+
+
+        {# {{ form_start(form) }}
+        {{ form_row(form.dateDebut) }}
+        {{ form_row(form.dateFin) }}
+        {{ form_row(form.salle) }}
+        {% for item in form.user %}
+        <td>{{ item.user }}</td>
+        {% endfor %}
+         {{ form_row(form.user) }} 
+        <button type="submit" class=" btn btn-primary btn-lg mt-2">Envoyer</button>
+        {{ form_end(form) }} #}
 
 
 {# <form class="row gx-3 gy-2 align-items-center">

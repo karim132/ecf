@@ -1,0 +1,40 @@
+{# templates/bundles/EasyAdmin/field/country.html.twig #}
+
+
+
+{% extends '@!EasyAdmin/field/country.html.twig' %}
+
+{% block name %}
+
+
+
+
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var action \EasyCorp\Bundle\EasyAdminBundle\Dto\ActionDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+   {{ dump(action) }}   
+
+
+
+
+{# <form action="{{ action.linkUrl }}" method="POST">
+   
+
+    {{ include('@EasyAdmin/crud/action.html.twig') }}
+    
+   
+
+</form> #}
+
+<div>
+
+<form action="{{ action.linkUrl }}" method="POST" class="me-2">
+    {{ include('@EasyAdmin/crud/action.html.twig') }}
+
+    
+</form>
+
+
+
+</div>
+{% endblock %}

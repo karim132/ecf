@@ -6,6 +6,7 @@ use App\Repository\SalleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SalleRepository::class)]
 class Salle
@@ -22,15 +23,22 @@ class Salle
     private ?int $nbPlaces = null;
 
     #[ORM\ManyToMany(targetEntity: Materiel::class, inversedBy: 'salles')]
+    // #[Assert\Cascade]
+    //  #[ORM\JoinColumn(referencedColumnName:"id", onDelete:"cascade")]
     private Collection $materiel;
 
     #[ORM\ManyToMany(targetEntity: Logiciel::class, inversedBy: 'salles')]
+    // #[Assert\Cascade]
+    //#[ORM\JoinColumn(referencedColumnName:"id", onDelete:"cascade")]
     private Collection $logiciel;
-
+    
     #[ORM\ManyToMany(targetEntity: Ergonomie::class, inversedBy: 'salles')]
+    // #[Assert\Cascade]
+    // #[ORM\JoinColumn(referencedColumnName:"id", onDelete:"cascade")]
     private Collection $ergonomie;
 
-    #[ORM\OneToMany(mappedBy: 'salle', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'salle', targetEntity: Reservation::class , cascade:['remove'])]
+    //#[ORM\JoinColumn(referencedColumnName:"id")]
     private Collection $reservations;
 
     #[ORM\Column(length: 255)]
@@ -156,27 +164,27 @@ class Salle
         return $this->reservations;
     }
 
-    public function addReservation(Reservation $reservation): self
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations->add($reservation);
-            $reservation->setSalle($this);
-        }
+    // public function addReservation(Reservation $reservation): self
+    // {
+    //     if (!$this->reservations->contains($reservation)) {
+    //         $this->reservations->add($reservation);
+    //         $reservation->setSalle($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeReservation(Reservation $reservation): self
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getSalle() === $this) {
-                $reservation->setSalle(null);
-            }
-        }
+    // public function removeReservation(Reservation $reservation): self
+    // {
+    //     if ($this->reservations->removeElement($reservation)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($reservation->getSalle() === $this) {
+    //             $reservation->setSalle(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getNom(): ?string
     {
@@ -192,13 +200,18 @@ class Salle
 
     public function getPrixHebdo(): ?float
     {
-        return $this->prixHebdo;
+        return $this->prixHebdo/100;
     }
 
     public function setPrixHebdo(float $prixHebdo): self
     {
-        $this->prixHebdo = $prixHebdo;
+        $this->prixHebdo = $prixHebdo/100;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
     }
 }

@@ -11,17 +11,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Reservation;
+use App\Entity\Salle;
 use App\Entity\Users;
+use App\Controller\ReservationController\etSalle;
 
 
 class ReservationController extends AbstractController
 {
     #[Route('/reservation/{id}', name: 'app_reservation', methods: ['GET', 'POST'])]
-    public function index(SalleRepository $salleResa , $id): Response
+    public function index(SalleRepository $salleResa ,$id): Response
     {
       
         return $this->render('reservation/reservation.html.twig', [
-           // Récupère la note demandée par son id
+           // Récupère la salle demandée par son id
             'reservation' => $salleResa->findOneBy(
               ['id' => $id],
             
@@ -29,26 +31,36 @@ class ReservationController extends AbstractController
          ]);
     }
     #[Route('/reservation/{id}', name: 'app_reservation', methods: ['GET', 'POST'])]
-    public function NewResa(Users $users,Request $request,EntityManagerInterface $entityManager, UsersRepository $usersRepository): Response
+    
+    public function NewResa(Request $request,EntityManagerInterface $entityManager,Users $user,Salle $salle): Response
     {
 
-        // $users = $usersRepository->find(1);
-        // $resa->setUser($users);
+    
         $resa = new Reservation();
         $form = $this->createForm(ReservationType::class, $resa);
+        $user = $this->getUser();
+        
+        
+
         $form->handleRequest($request);
-          $users->getUser();
-        //  $resa->setUser($users);
-        dd($resa);
+       
+        
+        
         if ($form->isSubmitted() && $form->isValid()){
-          
+
+          $resa->setUser($user);
+          $resa->setSalle($salle);
           $entityManager->persist($resa);
           $entityManager->flush();
-          //  $users = $usersRepository->find();
-          //  $resa->setUser($users);
-    }
-        return $this->render('reservation/reservation.html.twig', [
-            'form' => $form->createView()
+
+          
+    }  return $this->render('reservation/reservation.html.twig',[
+            
+              'form' => $form->createView(),
+      
+           
         ]);
-    }
+      }
+
+
 }
